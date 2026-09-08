@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4F46E5">
+    <meta name="description" content="DocuFlowPro - Free online PDF editor, converter, and document tools. Edit, merge, split, compress, convert PDFs, and more - all free, no login required.">
+    <title>DocuFlowPro - Free Online PDF & Document Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="vendor/pdf-lib.min.js"></script>
+    <script src="vendor/xlsx.full.min.js"></script>
+    <script src="vendor/mammoth.min.js"></script>
+    <script src="vendor/qrcode.bundle.js"></script>
+    <script src="vendor/jszip.min.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+    <div class="container header-inner">
+        <a href="index.html" class="logo">
+            <span class="logo-icon"><span class="material-symbols-rounded">description</span></span>
+            DocuFlowPro
+        </a>
+        <nav class="nav" id="mainNav">
+            <a href="#home" class="nav-link active" data-scroll>Home</a>
+            <a href="#categories" class="nav-link" data-scroll>Tools</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+            <a href="faq.html" class="nav-link">FAQ</a>
+        </nav>
+        <div class="header-actions">
+            <a href="#categories" class="btn btn-primary" data-scroll>Start for Free</a>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="active"><span class="material-symbols-rounded">home</span> Home</a>
+    <a href="#categories"><span class="material-symbols-rounded">apps</span> All Tools</a>
+    <div class="mobile-menu-divider"></div>
+    <div class="mobile-menu-section">PDF Tools</div>
+    <a href="#tool=merge"><span class="material-symbols-rounded">merge</span> Merge PDF</a>
+    <a href="#tool=split"><span class="material-symbols-rounded">cut</span> Split PDF</a>
+    <a href="#tool=compress"><span class="material-symbols-rounded">compress</span> Compress PDF</a>
+    <a href="#tool=rotate"><span class="material-symbols-rounded">rotate_right</span> Rotate PDF</a>
+    <div class="mobile-menu-divider"></div>
+    <div class="mobile-menu-section">Convert</div>
+    <a href="#tool=pdf-word"><span class="material-symbols-rounded">article</span> PDF to Word</a>
+    <a href="#tool=word-pdf"><span class="material-symbols-rounded">description</span> Word to PDF</a>
+    <a href="#tool=pdf-jpg"><span class="material-symbols-rounded">image</span> PDF to JPG</a>
+    <div class="mobile-menu-divider"></div>
+    <a href="about.html"><span class="material-symbols-rounded">info</span> About</a>
+    <a href="contact.html"><span class="material-symbols-rounded">mail</span> Contact</a>
+    <a href="faq.html"><span class="material-symbols-rounded">help</span> FAQ</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="material-symbols-rounded" style="font-size:16px">verified</span>
+                100% Free & No Login Required
+            </div>
+            <h1>All Your PDF & Document Tools In One Place</h1>
+            <p>Edit, convert, merge, split, compress, and more. All tools process your files securely in your browser — free, fast, and no account needed.</p>
+            <div class="upload-zone" id="homeUploadZone">
+                <input type="file" id="homeFileInput" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.webp,.xls,.xlsx,.ppt,.pptx,.rtf,.txt" multiple>
+                <div class="upload-icon">
+                    <span class="material-symbols-rounded">cloud_upload</span>
+                </div>
+                <h3>Drop a file here to get started</h3>
+                <p>or click to browse — then choose the tool you need</p>
+            </div>
+            <a href="#categories" class="btn btn-primary btn-lg" data-scroll style="margin-top:32px">Browse All Tools</a>
+        </div>
+    </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Powerful Tools, Completely Free</h2>
+            <p class="section-subtitle">Every tool works for real. Upload a file, process it, and download the actual output.</p>
+        </div>
+
+        <div class="tool-categories" id="toolCategories">
+            <!-- POPULATED BY app.js -->
+        </div>
+    </div>
+</section>
+
+<!-- TOOL WORKSPACE (hidden until a tool is selected) -->
+<section class="tool-workspace" id="toolWorkspace" style="display:none">
+    <div class="container">
+        <button class="btn btn-outline btn-back" id="backToTools">
+            <span class="material-symbols-rounded">arrow_back</span> All Tools
+        </button>
+        <div class="tool-header">
+            <div class="tool-header-icon" id="toolHeaderIcon"></div>
+            <div>
+                <h2 id="toolTitle"></h2>
+                <p id="toolDesc"></p>
+            </div>
+        </div>
+        <div class="tool-content" id="toolContent">
+            <!-- Tool-specific UI populated by app.js -->
+        </div>
+    </div>
+</section>
+
+<!-- RESULT MODAL -->
+<div class="modal-overlay" id="resultModal">
+    <div class="modal result-modal">
+        <h2 id="resultTitle">Processing Complete</h2>
+        <div id="resultBody"></div>
+        <div class="result-actions" id="resultActions"></div>
+    </div>
+</div>
+
+<!-- STATUS TOAST -->
+<div class="notification" id="notification">
+    <span class="material-symbols-rounded">info</span>
+    <span id="notificationText"></span>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo" style="color:#fff">
+                    <span class="logo-icon"><span class="material-symbols-rounded">description</span></span>
+                    DocuFlowPro
+                </a>
+                <p>Free online PDF editor, converter, and document tools. No sign-up, no paywall — your files, processed securely in your browser.</p>
+            </div>
+            <div class="footer-col">
+                <h4>PDF Tools</h4>
+                <a href="#tool=merge">Merge PDF</a>
+                <a href="#tool=split">Split PDF</a>
+                <a href="#tool=compress">Compress PDF</a>
+                <a href="#tool=rotate">Rotate PDF</a>
+                <a href="#tool=sign">Sign PDF</a>
+            </div>
+            <div class="footer-col">
+                <h4>Convert</h4>
+                <a href="#tool=word-pdf">Word to PDF</a>
+                <a href="#tool=pdf-word">PDF to Word</a>
+                <a href="#tool=jpg-pdf">JPG to PDF</a>
+                <a href="#tool=pdf-jpg">PDF to JPG</a>
+                <a href="#tool=excel-pdf">Excel to PDF</a>
+            </div>
+            <div class="footer-col">
+                <h4>Image Tools</h4>
+                <a href="#tool=jpg-png">JPG to PNG</a>
+                <a href="#tool=jpg-webp">JPG to WEBP</a>
+                <a href="#tool=compress-img">Compress Image</a>
+                <a href="#tool=ocr">Image to Text (OCR)</a>
+                <a href="#tool=qrcode">Create QR Code</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 DocuFlowPro. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
